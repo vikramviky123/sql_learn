@@ -41,3 +41,32 @@ DESCRIBE DML_database_2.employees;
 SELECT *
 FROM DML_database_2.employees;
 -- -----------------UPDATE------------------------
+--
+UPDATE DML_database_2.employees
+SET first_name = "Jinna",
+    last_name = "Bhai",
+    salary = 500000
+WHERE employee_id = 1;
+SELECT *
+FROM DML_database_2.employees;
+-- -----------------DELETE------------------------
+--
+DELETE FROM DML_database_2.employees
+WHERE first_name = "XXX";
+SELECT *
+FROM DML_database_2.employees;
+-- -----------------COMMIT & ROLLBACK------------------------
+--
+SET autocommit = 0;
+UPDATE DML_database_2.employees
+SET first_name = "Vikram",
+    last_name = "REDDY",
+    salary = 100000
+WHERE employee_id = 1;
+COMMIT;
+SELECT *
+FROM DML_database_2.employees;
+--
+ROLLBACK;
+SELECT *
+FROM DML_database_2.employees;
