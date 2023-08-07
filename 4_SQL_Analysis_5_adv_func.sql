@@ -33,6 +33,7 @@ SELECT date_format("2017-06-15", "%Y") as full_year_Y,
 from dual;
 --
 SELECT datediff("2023-06-15", "2017-06-15");
+-- --------Use of TIME FUNCTIONS-------------------
 --
 SELECT curdate() + 1;
 SELECT current_date() + 1;
