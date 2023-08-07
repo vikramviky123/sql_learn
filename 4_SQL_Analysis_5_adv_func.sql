@@ -35,6 +35,7 @@ from dual;
 SELECT datediff("2023-06-15", "2017-06-15");
 -- --------Use of TIME FUNCTIONS-------------------
 --
+-- --------Use of CURRENT TIME FUNCTIONS-------------------
 SELECT curdate() + 1;
 SELECT current_date() + 1;
 SELECT current_time();
