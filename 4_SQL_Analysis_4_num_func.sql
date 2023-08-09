@@ -35,7 +35,7 @@ SELECT log(3);
 SELECT ceil(3.8);
 SELECT floor(3.8);
 SELECT round(3.853489, 2);
-SELECT truncate(3.853489, 3);
+SELECT truncate(3.85348999, 3);
 --
 SELECT least(2, 3, 4, 5, 6, 87, 9);
 SELECT greatest(2, 3, 4, 5, 6, 87, 9);

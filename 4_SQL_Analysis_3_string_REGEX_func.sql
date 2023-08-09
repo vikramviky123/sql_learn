@@ -64,3 +64,32 @@ FROM dual;
 SELECT concat("Vikram reddy", space(15)) as newStr,
     length(concat("Vikram reddy", space(15))) as newStr_len
 FROM dual;
+--
+-- REGEX----------------------------------------------------------
+-- REGEXP --> CHECKS if present or not--BOOLEAN
+SELECT 'Michael!' REGEXP '.*';
+SELECT 'xyxms' REGEXP '^[a-e]';
+-- REGEXP_LIKE(input_string, pattern [, match_option])
+-- CHECKS if pattern present or not of spcified string
+SELECT REGEXP_LIKE('dog cat mouse pink red blue', 'cat', 'i');
+-- REGEXP_INSTR(input_string, pattern [, start_position [, occurrence [, match_option [, return_option]]]])
+-- gets the POSITION of spcified string
+SELECT REGEXP_INSTR('dog aaa cat aaa dog aaa', 'a{3}', 1, 3, 'c');
+SELECT REGEXP_INSTR('aa aaa aaaa', 'a{4}');
+-- REGEXP_REPLACE(input_string, pattern, replacement [, start_position [, occurrence [, match_option]]])
+-- REPLACE the string at occurence provided
+SELECT REGEXP_REPLACE(
+        'dog  cat DOG aaa DOG',
+        'DOG',
+        'kukka',
+        1,
+        0,
+        'c'
+    );
+-- REGEXP_SUBSTR(input_string, pattern [, start_position [, occurrence [, match_option [, return_option]]]])
+SELECT REGEXP_SUBSTR('abc def ghi', '[a-z]+');
+SELECT REGEXP_SUBSTR('abc def ghi', '[a-z]+', 1, 2);
+SELECT REGEXP_SUBSTR(
+        "vikram_viky2001@yahoo.com",
+        '^[A-Za-z0-9._%+-]+'
+    )
