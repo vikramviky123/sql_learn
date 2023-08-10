@@ -29,23 +29,31 @@ FROM hr_emp.employees;
 SELECT concat(first_name, " ", last_name) as full_name,
     insert(concat(first_name, " ", last_name), 7, 3, "Bad")
 FROM hr_emp.employees;
+--
+SELECT concat_ws(
+        '---->',
+        "my full name is :",
+        concat(first_name, " ", last_name),
+        salary
+    ) as named_entity
+FROM hr_emp.employees;
 -- ----------------------------------------------------
---INSTR, POSITION, REPLACE, REVERSE -->FINDING INDEX of a STRING
-SELECT INSTR("Vikram Reddy", "R") AS MatchPosition;
-SELECT POSITION("R" IN "Vikram Reddy") AS justPosition;
-SELECT REPLACE("Vikram Reddy", "R", "M") AS rplacePosition;
-SELECT REVERSE("Vikram Reddy") AS reversePosition;
---
---
 --INSERT -->adding a string/number start pos and length of str/num
 SELECT
 insert("Vikram Reddy", 7, 4, 125) AS MatchPosition;
+--REPLACE, REVERSE -->PERFORM operations on a STRING
+SELECT REPLACE("Vikram Reddy", "R", "M") AS rplacePosition;
+SELECT REVERSE("Vikram Reddy") AS reversePosition;
 --
+--FINDING INDEX of a STRING
+SELECT INSTR("Vikram Reddy", "R") AS MatchPosition;
+SELECT POSITION("R" IN "Vikram Reddy") AS justPosition;
+SELECT LOCATE("3", "W3School3s.com", 3) AS positionWithOccur;
 --MID, SUBSTR, SUBSTRING, SUBSTRING_INDEX -->extracting a string/number start pos and length of str/num
 SELECT MID("Vikram Reddy", 8, 4) AS substrPosition;
 SELECT SUBSTR("Vikram Reddy", 8, 4) AS substrPosition;
 SELECT SUBSTRING("Vikram Reddy", 8, 4) AS substrPosition;
--- substring upto which character you want, the character occurence
+-- -- -- substring upto which character you want, the character occurence
 SELECT SUBSTRING_INDEX("www.w3schools.com", "cho", 1);
 --
 --
@@ -64,6 +72,24 @@ FROM dual;
 SELECT concat("Vikram reddy", space(15)) as newStr,
     length(concat("Vikram reddy", space(15))) as newStr_len
 FROM dual;
+--GROUP_CONCAT
+SELECT manager_id,
+    GROUP_CONCAT(
+        first_name
+        ORDER BY first_name ASC SEPARATOR ', '
+    ) AS names,
+    floor(sum(salary)) total_paid,
+    floor(avg(salary)) avg_sal
+FROM hr_emp.employees
+GROUP BY manager_id
+ORDER BY avg_sal DESC;
+--
+-- ELT to get the value for given position
+SELECT ELT(1, 'Aa', 'Bb', 'Cc', 'Dd');
+-- FIELD to get the position for given value
+SELECT FIELD('Bb', 'Aa', 'Bb', 'Cc', 'Dd', 'Ff');
+SELECT FIND_IN_SET("q", "s,q,l");
+SELECT FORMAT(250500.5634, 3);
 --
 -- REGEX----------------------------------------------------------
 -- REGEXP --> CHECKS if present or not--BOOLEAN
