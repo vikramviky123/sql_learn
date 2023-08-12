@@ -7,16 +7,43 @@ SHOW TABLES;
 DESCRIBE hr_emp.employees;
 --
 -- --------Use of WINDOW FUNCTIONS-------------------
-SELECT employee_id,
+SELECT manager_id,
     salary,
     SUM(salary) OVER (
-        ORDER BY employee_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ) AS running_total,
     AVG(salary) OVER (
-        ORDER BY employee_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ) AS running_avg
 FROM hr_emp.employees;
 --
+-- ROW_NUMBER,OVER and PARTITION-------------------------
+SELECT manager_id,
+    salary,
+    row_number() OVER (
+        ORDER BY manager_id
+    ) as row_numba,
+    sum(salary) OVER (
+        PARTITION BY manager_id
+        ORDER BY manager_id
+    ) prtn_sal_mngr_id,
+    sum(salary) OVER (
+        ORDER BY manager_id
+    ) AS ordr_sal_mngr_id,
+    SUM(salary) OVER (
+        ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+    ) AS ordr_sal_mngr_id_rng_up_uf,
+    SUM(salary) OVER (
+        ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS ordr_sal_mngr_id_rng_up_cr,
+    SUM(salary) OVER (
+        PARTITION BY manager_id
+        ORDER BY manager_id ROWS UNBOUNDED PRECEDING
+    ) AS prtn_sal_mngr_id_rows_up,
+    SUM(salary) OVER (
+        ORDER BY manager_id ROWS UNBOUNDED PRECEDING
+    ) AS ordr_sal_mngr_id_rows_up
+FROM hr_emp.employees;
 --
 SELECT employee_id,
     salary,
@@ -25,10 +52,13 @@ SELECT employee_id,
     ) AS max_1_window,
     MAX(salary) OVER (
         ORDER BY employee_id RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING
-    ) AS max_2_window
+    ) AS max_2_window,
+    avg(salary) OVER (
+        ORDER BY employee_id RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING
+    ) AS mavg_2_window
 FROM hr_emp.employees;
 --
---
+--ROW_NUMBER,OVER, CUME_DIST, PERCENT_RANK-------------------------
 SELECT salary,
     ROW_NUMBER() OVER w AS 'row_number',
     CUME_DIST() OVER w AS 'cume_dist',
@@ -37,20 +67,20 @@ FROM hr_emp.employees WINDOW w AS (
         ORDER BY salary
     );
 --
--- ROW_NUMBER,OVER and PARTITION
-SELECT first_name,
+--
+SELECT employee_id,
+    first_name,
     last_name,
     manager_id,
-    job_id,
     salary,
-    row_number() OVER (),
-    sum(salary) OVER () AS total_salary,
+    row_number() OVER (
+        ORDER BY manager_id
+    ) as row_numba,
     sum(salary) OVER (
         PARTITION BY manager_id
-        ORDER BY manager_id
+        ORDER BY manager_id ROWS UNBOUNDED PRECEDING
     ) total_salary_man_id
 FROM hr_emp.employees;
---
 --
 -- ROW_NUMBER, RANK, DENSE_RANK ---------------------------------------------
 SELECT first_name,
@@ -116,9 +146,20 @@ SELECT first_name,
     LEAD(salary, 2) OVER w AS 'lead_2',
     NTILE(2) OVER w AS 'ntile_2'
 FROM hr_emp.employees WINDOW w AS (
-        ORDER BY salary range between unbounded preceding and unbounded following
+        ORDER BY salary
     );
 --
---
-SELECT sum(salary)
+-- VIEWS ---------------------------------------------
+SELECT *
 FROM hr_emp.employees;
+--
+CREATE VIEW hr_emp.emp_70 AS
+SELECT employee_id,
+    concat(first_name, ' ', last_name),
+    salary
+FROM hr_emp.employees
+WHERE manager_id = 2;
+--
+SELECT *
+FROM hr_emp.emp_70;
+DROP VIEW hr_emp.emp_70;
