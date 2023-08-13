@@ -32,7 +32,7 @@ FROM cte_table
 WHERE abs(numba_dsc - numba_asc) < 2;
 --
 --
-SELECT avg(salary) as medianValue
+SELECT salary as medianValue
 FROM (
         SELECT salary,
             ROW_NUMBER() OVER (
@@ -44,3 +44,47 @@ FROM (
 WHERE row_num = (total_rows + 1) / 2
     OR row_num in (total_rows / 2,(total_rows / 2) + 1);
 -- ----------------------------------------------------------------------------
+-- SUB QUERY
+SELECT *
+FROM hr_emp.employees
+WHERE salary > (
+        SELECT AVG(salary)
+        FROM hr_emp.employees
+    );
+--
+-- CORRELATED SUBQUERY-------------------------------------------------
+SELECT department_id,
+    AVG(salary)
+FROM hr_emp.employees
+GROUP BY department_id;
+--
+SELECT *
+FROM hr_emp.employees ei
+WHERE salary >(
+        SELECT AVG(salary)
+        FROM hr_emp.employees as em
+        WHERE ei.department_id = em.department_id
+    )
+ORDER BY department_id;
+--
+SELECT department_id,
+    AVG(salary)
+FROM hr_emp.employees
+GROUP BY department_id
+having AVG(salary) >= (
+        SELECT AVG(salary)
+        FROM hr_emp.employees
+        WHERE department_id = 70
+    );
+-- NESTED SUBQUERY-------------------------------------------------
+SELECT *
+FROM hr_emp.employees
+WHERE department_id in (
+        SELECT department_id
+        FROM hr_emp.departments
+        WHERE location_id in (
+                SELECT location_id
+                FROM hr_emp.locations
+                WHERE city = "panaji"
+            )
+    );

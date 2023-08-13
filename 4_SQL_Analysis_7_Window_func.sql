@@ -27,12 +27,13 @@ SELECT manager_id,
         PARTITION BY manager_id
         ORDER BY manager_id
     ) prtn_sal_mngr_id,
-    sum(salary) OVER (
-        ORDER BY manager_id
-    ) AS ordr_sal_mngr_id,
+    sum(salary) OVER () _sal_mngr_id,
     SUM(salary) OVER (
         ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     ) AS ordr_sal_mngr_id_rng_up_uf,
+    sum(salary) OVER (
+        ORDER BY manager_id
+    ) AS ordr_sal_mngr_id,
     SUM(salary) OVER (
         ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ) AS ordr_sal_mngr_id_rng_up_cr,
@@ -47,6 +48,12 @@ FROM hr_emp.employees;
 --
 SELECT employee_id,
     salary,
+    SUM(salary) OVER(
+        ORDER BY employee_id
+    ) AS ordrby_sum_sal,
+    SUM(salary) OVER(
+        ORDER BY employee_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS rng_up_cr_sum_sal,
     MAX(salary) OVER (
         ORDER BY employee_id RANGE BETWEEN 1 PRECEDING AND CURRENT ROW
     ) AS max_1_window,
