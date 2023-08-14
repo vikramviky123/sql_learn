@@ -9,6 +9,16 @@ with cte_table AS (
 SELECT *
 from cte_table;
 --
+with average_sal (avgg_sal) AS(
+    SELECT AVG(salary)
+    FROM hr_emp.employees
+)
+SELECT *
+FROM hr_emp.employees e,
+    average_sal av
+WHERE e.salary > av.avgg_sal;
+--
+--
 --Findind MEDIAN VALUE DIFFERENT WAYS
 with cte_table AS(
     SELECT employee_id,

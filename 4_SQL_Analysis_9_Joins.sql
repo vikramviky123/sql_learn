@@ -36,3 +36,68 @@ FROM hr_emp.employees e
     INNER JOIN hr_emp.locations l ON l.location_id = d.location_id
 WHERE l.state_province IS NOT NULL
 ORDER BY e.employee_id;
+--
+SELECT *
+FROM hr_emp.employees;
+SELECT *
+FROM hr_emp.departments;
+SELECT *
+FROM hr_emp.locations;
+--
+-- LEFT JOIN--------------------------------------------
+SELECT e.employee_id,
+    e.department_id,
+    d.department_name,
+    e.salary
+FROM hr_emp.departments AS d
+    LEFT OUTER JOIN hr_emp.employees AS e ON e.department_id = d.department_id;
+--
+SELECT e.employee_id,
+    e.department_id,
+    d.department_name,
+    e.salary
+FROM hr_emp.employees AS e
+    LEFT OUTER JOIN hr_emp.departments AS d ON e.department_id = d.department_id;
+-- RIGHT JOIN--------------------------------------------
+SELECT e.employee_id,
+    e.department_id,
+    d.department_name,
+    e.salary
+FROM hr_emp.departments AS d
+    RIGHT OUTER JOIN hr_emp.employees AS e ON e.department_id = d.department_id;
+-- FULL OUTER JOIN--------------------------------------------
+SELECT e.employee_id,
+    e.department_id,
+    d.department_name,
+    e.salary
+FROM hr_emp.departments AS d
+    LEFT OUTER JOIN hr_emp.employees AS e ON e.department_id = d.department_id
+UNION
+SELECT e.employee_id,
+    e.department_id,
+    d.department_name,
+    e.salary
+FROM hr_emp.departments AS d
+    RIGHT OUTER JOIN hr_emp.employees AS e ON e.department_id = d.department_id
+ORDER BY employee_id;
+--
+-- SELF JOIN--------------------------------------------
+SELECT e.employee_id,
+    e.manager_id,
+    e.first_name,
+    m.employee_id AS mngr_emp_id,
+    m.first_name as manager_firstName
+FROM hr_emp.employees AS e
+    INNER JOIN hr_emp.employees AS m ON e.manager_id = m.employee_id
+ORDER BY e.manager_id;
+--
+SELECT *
+FROM hr_emp.employees;
+--
+-- CROSS JOIN--------------------------------------------
+SELECT e.employee_id,
+    e.department_id,
+    d.department_name,
+    e.salary
+FROM hr_emp.departments AS d
+    CROSS JOIN hr_emp.employees AS e;
