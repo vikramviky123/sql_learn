@@ -43,3 +43,6 @@ WHERE first_name LIKE "_a%";
 SELECT *
 from hr_emp.employees
 WHERE first_name LIKE "V____";
+--
+-- This casts the string '123' to an integer
+SELECT '123'::int;

@@ -81,12 +81,10 @@ SELECT employee_id,
     manager_id,
     salary,
     row_number() OVER (
+        PARTITION BY manager_id
         ORDER BY manager_id
     ) as row_numba,
-    sum(salary) OVER (
-        PARTITION BY manager_id
-        ORDER BY manager_id ROWS UNBOUNDED PRECEDING
-    ) total_salary_man_id
+    sum(salary) OVER (PARTITION BY manager_id) total_salary_man_id
 FROM hr_emp.employees;
 --
 -- ROW_NUMBER, RANK, DENSE_RANK ---------------------------------------------

@@ -95,9 +95,24 @@ SELECT *
 FROM hr_emp.employees;
 --
 -- CROSS JOIN--------------------------------------------
-SELECT e.employee_id,
-    e.department_id,
+SELECT d.department_id,
     d.department_name,
-    e.salary
+    d.manager_id,
+    l.location_id,
+    l.state_province,
+    l.city
 FROM hr_emp.departments AS d
-    CROSS JOIN hr_emp.employees AS e;
+    CROSS JOIN hr_emp.locations AS l
+ORDER BY location_id,
+    department_id;
+-- -------------------------------------------
+SELECT d.department_id,
+    d.department_name,
+    d.manager_id,
+    l.location_id,
+    l.state_province,
+    l.city
+FROM hr_emp.departments AS d,
+    hr_emp.locations AS l
+ORDER BY location_id,
+    department_id;
