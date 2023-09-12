@@ -45,16 +45,17 @@ insert("Vikram Reddy", 7, 4, 125) AS MatchPosition;
 SELECT REPLACE("Vikram Reddy", "R", "M") AS rplacePosition;
 SELECT REVERSE("Vikram Reddy") AS reversePosition;
 --
---FINDING INDEX of a STRING
+--FINDING INDEX of a STRING, for LOCATE 3rd para is start postion
 SELECT INSTR("Vikram Reddy", "R") AS MatchPosition;
 SELECT POSITION("R" IN "Vikram Reddy") AS justPosition;
-SELECT LOCATE("3", "W3School3s.com", 3) AS positionWithOccur;
+SELECT LOCATE("3", "W3School3s3.com3", 1) AS positionWithOccur;
 --MID, SUBSTR, SUBSTRING, SUBSTRING_INDEX -->extracting a string/number start pos and length of str/num
 SELECT MID("Vikram Reddy", 8, 4) AS substrPosition;
 SELECT SUBSTR("Vikram Reddy", 8, 4) AS substrPosition;
 SELECT SUBSTRING("Vikram Reddy", 8, 4) AS substrPosition;
 -- -- -- substring upto which character you want, the character occurence
-SELECT SUBSTRING_INDEX("www.w3schools.com", "cho", 1);
+SELECT SUBSTRING_INDEX("www.w3schools.chocom", "cho", 1),
+    SUBSTRING_INDEX("www.w3schools.chocom", "cho", -1);
 --
 --
 --TRIM, LTRIM, RTRIM -->Removing spaces
@@ -97,7 +98,7 @@ SELECT 'Michael!' REGEXP '.*';
 SELECT 'xyxms' REGEXP '^[a-e]';
 -- REGEXP_LIKE(input_string, pattern [, match_option])
 -- CHECKS if pattern present or not of spcified string
-SELECT REGEXP_LIKE('dog cat mouse pink red blue', 'cat', 'i');
+SELECT REGEXP_LIKE('dog cat mouse pink red blue', 'mouse', 'i');
 -- REGEXP_INSTR(input_string, pattern [, start_position [, occurrence [, match_option [, return_option]]]])
 -- gets the POSITION of spcified string
 SELECT REGEXP_INSTR('dog aaa cat aaa dog aaa', 'a{3}', 1, 3, 'c');

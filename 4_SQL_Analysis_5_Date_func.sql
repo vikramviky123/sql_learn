@@ -21,10 +21,11 @@ SELECT date("2017-06-15 09:34:21") as date_,
     subtime("2017-06-15 09:51:20", "03:04:3") as time_sub
 FROM dual;
 --
-SELECT datediff("2023-06-07", "2023-06-14");
+SELECT datediff("2023-06-14", "2022-06-14");
 SELECT datediff(now(), hire_date)
 FROM hr_emp.employees;
 --
+--Note: 1=Sunday, 2=Monday, 3=Tuesday, 4=Wednesday, 5=Thursday, 6=Friday, 7=Saturday.
 SELECT dayofweek("2023-07-25") AS get_weekDay,
     day("2023-07-25") AS get_dayInMonth,
     dayofmonth("2023-07-25") AS get_dayOfMonth,
@@ -56,7 +57,7 @@ SELECT makedate(2018, 360) as create_date,
 FROM dual;
 --
 --
-SELECT date_format("2017-06-15", "%d/%M/%Y") - date_format("2017-25-15", "%d/%M/%Y");
+SELECT date_format("2017-06-15", "%d/%M/%Y");
 SELECT STR_TO_DATE("Thu Jun 15 2017", "%a %b %d %Y") - STR_TO_DATE("Thu Jun 25 2017", "%a %b %d %Y");
 SELECT STR_TO_DATE("Monday August 14 2017", "%W %M %e %Y");
 SELECT date("2017-06-15 09:51:20");
@@ -69,6 +70,7 @@ SELECT date_format("2017-06-15", "%D") AS Day_suffix_D,
 from dual;
 --USE of WEEK DAY
 SELECT date_format("2017-06-15", "%w") as weekDay_num_w,
+    weekday("2017-06-15") AS get_NumOfWeekDay,
     date_format("2017-06-15", "%W") as weekDay_name_W,
     date_format("2017-06-15", "%a") as short_weekDay_name_a
 from dual;
@@ -89,7 +91,7 @@ from dual;
 SELECT hire_date,
     date(hire_date) as _date,
     date_format(hire_date, "%d/%m/%Y") as act_date,
-    (date_format(hire_date, "%w") + 1) as weekDay,
+    date_format(hire_date, "%w") as week_Day,
     date_format(hire_date, "%d") as dayNum,
     date_format(hire_date, "%m") as MonthNum,
     date_format(hire_date, "%Y") as yearNum,
