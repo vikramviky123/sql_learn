@@ -30,7 +30,7 @@ DROP DATABASE DDL_database_1;
 -- -----------------------------------------
 -- DROP a table
 DROP TABLE DDL_database_1.customers;
--- DROP TABLE DDL_database_1_py.customers;
+-- DROP TABLE DDL_database_1_py.customers;ode 
 -- DROP TABLE DDL_database_1_py.employees;
 -- ----------
 -- -----------------ALTER------------------------

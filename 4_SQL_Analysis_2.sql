@@ -84,3 +84,5 @@ DROP VIEW hr_emp.employee_low_salary;
 SELECT *
 FROM hr_emp.employees
 LIMIT 10;
+select cast(2 as binary)
+from dual;

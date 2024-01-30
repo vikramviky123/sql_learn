@@ -13,6 +13,7 @@ SELECT now();
 SELECT sysdate();
 --
 SELECT date("2017-06-15 09:34:21") as date_,
+    date_format(adddate(now(), interval -10 day), "%d-%m-%Y") as add_days_now,
     adddate("2017-06-15", interval 10 day) as add_days,
     date_add("2017-06-15", interval 10 day) as days_add,
     date_sub("2017-06-15", interval 10 day) as days_substract,
@@ -100,7 +101,8 @@ SELECT hire_date,
     date_format(hire_date, "%M") as monthName
 FROM hr_emp.employees;
 --
-SELECT STR_TO_DATE(hire_date, "%d/%m/%Y") as act_date
+SELECT STR_TO_DATE(hire_date, "%d/%m/%Y") as act_date,
+    hire_date
 FROM hr_emp.employees;
 --
 -- -----------------------------------------------------------------------------------------------

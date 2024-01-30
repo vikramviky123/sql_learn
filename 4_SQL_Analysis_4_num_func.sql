@@ -14,11 +14,11 @@ SELECT 10 + 5;
 SELECT 10 -5;
 SELECT 10 * 5;
 SELECT 10 / 5;
-SELECT 10 %5;
+SELECT 11 %100;
 SELECT 10 < 5;
 SELECT 10 > 5;
-SELECT 10 DIV 5;
-SELECT 10 MOD 3;
+SELECT 11 DIV 5;
+SELECT 11 MOD 3;
 --
 SELECT count(salary) as total_count,
     avg(salary) as avg_salary,
@@ -34,9 +34,9 @@ SELECT log(3);
 --
 SELECT ceil(3.8);
 SELECT floor(3.8);
-SELECT round(250500.5634, 2);
-SELECT truncate(250500.5634, 3);
-SELECT FORMAT(250500.5634, 3);
+SELECT round(250500.5634, 0);
+SELECT truncate(250500.5674, 3);
+SELECT FORMAT(250500.5674, 3);
 --
 SELECT least(2, 3, 4, 5, 6, 87, 9);
 SELECT greatest(2, 3, 4, 5, 6, 87, 9);

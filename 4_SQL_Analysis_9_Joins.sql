@@ -10,7 +10,7 @@ SELECT e.employee_id,
     ) as row_numb
 FROM hr_emp.employees AS e
     INNER JOIN hr_emp.departments AS d ON e.department_id = d.department_id
-ORDER BY d.department_id;
+ORDER BY row_numb DESC;
 --
 ----------------------------------
 SELECT e.employee_id,

@@ -59,11 +59,15 @@ SELECT first_name,
     ISNULL(commission_pct) AS comm_imputed
 FROM hr_emp.employees;
 --
-SELECT *
+SELECT CONVERT(salary, nchar)
 FROM hr_emp.employees;
 -- -----------------------------------------------
 SELECT CAST("2017-08-31" AS DATE);
 SELECT CONVERT("2017-08-31", DATE);
+SELECT CONVERT(2017, nchar);
+SELECT CONCAT(2, '')
+SELECT length(123)
+from dual;
 --
 SELECT cast("2017" AS DECIMAL);
 --

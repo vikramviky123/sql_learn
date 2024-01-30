@@ -24,6 +24,9 @@ SELECT manager_id,
         ORDER BY manager_id
     ) as row_numba,
     sum(salary) OVER (
+        ORDER BY manager_id
+    ) AS ordr_sal_mngr_id,
+    sum(salary) OVER (
         PARTITION BY manager_id
         ORDER BY manager_id
     ) prtn_sal_mngr_id,
@@ -31,9 +34,6 @@ SELECT manager_id,
     SUM(salary) OVER (
         ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     ) AS ordr_sal_mngr_id_rng_up_uf,
-    sum(salary) OVER (
-        ORDER BY manager_id
-    ) AS ordr_sal_mngr_id,
     SUM(salary) OVER (
         ORDER BY manager_id RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ) AS ordr_sal_mngr_id_rng_up_cr,
@@ -114,7 +114,8 @@ SELECT first_name,
     LAST_VALUE(salary) OVER (
         order by salary DESC range between unbounded preceding and unbounded following
     ) as ls_salary
-FROM hr_emp.employees;
+FROM hr_emp.employees
+ORDER BY manager_id;
 --
 SELECT first_name,
     last_name,

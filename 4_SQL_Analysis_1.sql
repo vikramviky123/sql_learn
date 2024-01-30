@@ -6,6 +6,11 @@ SHOW TABLES;
 --
 DESCRIBE hr_emp.employees;
 --
+SELECT CHAR(25)
+FROM dual;
+--
+SELECT CONCAT_WS(CHAR(10 using utf8), 'Vikram', 'Reddy')
+FROM dual;
 -- --------Use of SELECT-------------------
 SELECT *
 FROM hr_emp.employees;
